@@ -9,8 +9,24 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      // CONFIGURACAO
+      theme: ThemeData(
+        appBarTheme: AppBarTheme(
+          backgroundColor: Color(0xFFFF5722)
+        ),
+        textTheme: const TextTheme(
+          bodyMedium: TextStyle(
+            fontSize: 200
+          )
+        )
+      ),
+
+      // ESTRUTURA
       home: Scaffold(
+        appBar: AppBar(
+          title: Text("Pedido Flash")
+        ),
         body: Center(
           child: Text('Hello World!'),
         ),
