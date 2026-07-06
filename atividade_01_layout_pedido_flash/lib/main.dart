@@ -125,8 +125,11 @@ class MainApp extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text("Cardápio Rápido!", style: TextStyle(fontWeight: FontWeight.bold))
-                )
+                  child: Text(
+                    "Cardápio Rápido",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
               ),
               Card(
                 elevation: 2,
@@ -176,37 +179,65 @@ class MainApp extends StatelessWidget {
                     ),
                     Expanded(child: SizedBox()),
                     Padding(
+                      padding: const EdgeInsets.all(1.0),
+                      child: Transform.rotate(
+                        angle: -0.2,
+                        child: Container(
+                          padding: const EdgeInsets.all(5.0),
+                          decoration: BoxDecoration(
+                            color: Colors.green,
+                            borderRadius: BorderRadius.circular(
+                              8.0,
+                            ),
+                          ),
+                          child: Text(
+                            "PROMO",
+                            style: TextStyle(
+                              fontSize: 10.0,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Text("R\$ 12,00", style: TextStyle(fontSize: 15)),
                     ),
                   ],
                 ),
               ),
-              Card(
-                elevation: 2,
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Image.asset(
-                        "assets/hamburguer.png",
-                        width: 30,
-                        height: 25,
+              Opacity(
+                opacity: 0.25,
+                child: Card(
+                  elevation: 2,
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Image.asset(
+                          "assets/hamburguer.png",
+                          width: 30,
+                          height: 25,
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Text(
-                        "Hámburguer Duplo",
-                        style: TextStyle(fontSize: 15),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Text(
+                          "Hámburguer Duplo (Esgotado)",
+                          style: TextStyle(fontSize: 15),
+                        ),
                       ),
-                    ),
-                    Expanded(child: SizedBox()),
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Text("R\$ 32,00", style: TextStyle(fontSize: 15)),
-                    ),
-                  ],
+                      Expanded(child: SizedBox()),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Text(
+                          "R\$ 32,00",
+                          style: TextStyle(fontSize: 15),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
