@@ -17,7 +17,7 @@ class MainApp extends StatelessWidget {
         ),
         textTheme: const TextTheme(
           bodyMedium: TextStyle(
-            fontSize: 200
+            fontSize: 20
           )
         )
       ),
@@ -26,6 +26,71 @@ class MainApp extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(
           title: Text("Pedido Flash")
+        ),
+        drawer: Drawer(
+          child: Column(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Color(0xFFFF5722), Color(0xFFFF8C00)]
+                  ) 
+                ),
+                width: 350, height: 120,
+                child: Align(
+                  alignment: Alignment.bottomLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Text("Menu Caixa", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold))
+                  ),
+                ),
+              ),
+              Container(
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Image.asset("assets/car.png", width: 30, height: 25),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text("Novo Pedido", style: TextStyle(fontSize: 15)),
+                        ),
+                      ]
+                    ),
+                    Divider(),
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Image.asset("assets/historical.png", width: 30, height: 25),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text("Histórico", style: TextStyle(fontSize: 15)),
+                        ),
+                      ]
+                    ),
+                    Divider(),
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Image.asset("assets/setting.png", width: 30, height: 25),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text("Configurações", style: TextStyle(fontSize: 15)),
+                        ),
+                      ]
+                    ),
+                  ],
+                )
+              )
+            ],
+          ),
         ),
         body: Center(
           child: Text('Hello World!'),
