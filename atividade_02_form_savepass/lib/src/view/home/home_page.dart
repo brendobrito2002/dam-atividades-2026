@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
                   height: 48,
                   child: Center(
                     child: Text(
-                      "AL",
+                      "US",
                       style: AppTextStyle.headline6
                           .copyWith(color: AppColors.primary),
                     ),
@@ -68,7 +68,7 @@ class _HomePageState extends State<HomePage> {
                         style: AppTextStyle.headline5,
                         children: [
                           TextSpan(
-                              text: 'Alex Lopes',
+                              text: 'Usuário',
                               style: AppTextStyle.headline4),
                         ],
                       ),
