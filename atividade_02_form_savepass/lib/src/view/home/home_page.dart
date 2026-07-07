@@ -37,43 +37,47 @@ class _HomePageState extends State<HomePage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
-            children: [
-              Container(
-                decoration: const BoxDecoration(
-                  color: AppColors.black900,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(8),
-                  ),
-                ),
-                width: 48,
-                height: 48,
-                child: Center(
-                  child: Text(
-                    "AL",
-                    style: AppTextStyle.headline6
-                        .copyWith(color: AppColors.primary),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 16),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text.rich(
-                    TextSpan(
-                      text: 'Olá, ',
-                      style: AppTextStyle.headline5,
-                      children: [
-                        TextSpan(
-                            text: 'Alex Lopes', style: AppTextStyle.headline4),
-                      ],
+          GestureDetector(
+            onTap: (() => Navigator.pushNamed(context, "/profile")),
+            child: Row(
+              children: [
+                Container(
+                  decoration: const BoxDecoration(
+                    color: AppColors.black900,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(8),
                     ),
                   ),
-                  Text('Sinta-se seguro aqui', style: AppTextStyle.subtitle2),
-                ],
-              ),
-            ],
+                  width: 48,
+                  height: 48,
+                  child: Center(
+                    child: Text(
+                      "AL",
+                      style: AppTextStyle.headline6
+                          .copyWith(color: AppColors.primary),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text.rich(
+                      TextSpan(
+                        text: 'Olá, ',
+                        style: AppTextStyle.headline5,
+                        children: [
+                          TextSpan(
+                              text: 'Alex Lopes',
+                              style: AppTextStyle.headline4),
+                        ],
+                      ),
+                    ),
+                    Text('Sinta-se seguro aqui', style: AppTextStyle.subtitle2),
+                  ],
+                ),
+              ],
+            ),
           ),
           Container(
             decoration: BoxDecoration(
