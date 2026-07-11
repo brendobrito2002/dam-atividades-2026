@@ -7,6 +7,47 @@ import 'package:vendas_app/src/features/cart/widgets/cart_bottom_banner.dart';
 class ProductListPage extends StatelessWidget {
   const ProductListPage({super.key});
 
+  void _showSortDialog(BuildContext context, ProductViewModel productViewModel) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return SimpleDialog(
+          title: const Text('Ordenar por:'),
+          children: [
+            SimpleDialogOption(
+              onPressed: () {
+                Navigator.pop(context);
+                productViewModel.sortByName(ascending: true);
+              },
+              child: const Text('Nome (A-Z)'),
+            ),
+            SimpleDialogOption(
+              onPressed: () {
+                Navigator.pop(context);
+                productViewModel.sortByName(ascending: false);
+              },
+              child: const Text('Nome (Z-A)'),
+            ),
+            SimpleDialogOption(
+              onPressed: () {
+                Navigator.pop(context);
+                productViewModel.sortByPrice(ascending: true);
+              },
+              child: const Text('Preço (Menor para Maior)'),
+            ),
+            SimpleDialogOption(
+              onPressed: () {
+                Navigator.pop(context);
+                productViewModel.sortByPrice(ascending: false);
+              },
+              child: const Text('Preço (Maior para Menor)'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final productViewModel = context.watch<ProductViewModel>();
@@ -17,6 +58,11 @@ class ProductListPage extends StatelessWidget {
         title: const Text('Produtos'),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         actions: [
+          IconButton(
+            icon: const Icon(Icons.sort),
+            onPressed: () => _showSortDialog(context, productViewModel),
+            tooltip: "Filtrar Produtos",
+          ),
           IconButton(
             icon: const Icon(Icons.add),
             onPressed: () => Navigator.pushNamed(context, '/products/form'),
