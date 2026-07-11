@@ -7,6 +7,7 @@ import 'package:save_pass/src/view/home/home_page.dart';
 import 'package:save_pass/src/view/new_password_page/new_password_page.dart';
 import 'package:save_pass/src/view/splash/splash_page.dart';
 import 'package:save_pass/ui/theme.dart';
+import 'package:save_pass/src/view/profile/profile_page.dart';
 
 const bool kReleaseMode = bool.fromEnvironment('dart.vm.product');
 
@@ -48,6 +49,10 @@ class App extends StatelessWidget {
                           : null,
                     ),
                   );
+                case '/profile':
+                    return MaterialPageRoute(
+                      builder: (context) => const ProfilePage()
+                    );
                 default:
                   return MaterialPageRoute(
                     builder: (context) => const SplashPage(),

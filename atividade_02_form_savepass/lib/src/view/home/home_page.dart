@@ -27,26 +27,28 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget header(BuildContext context) {
-    // Escuta as alterações no controller do provider
-    final controller = context.watch<SQlitePasswordController>();
-    log('Perfil salvo: ${controller.profile}');
-    // Obtém o nome cadastrado ou exibe o padrão "Usuário"
-    final String username =
-        (controller.profile != null && controller.profile!.username.isNotEmpty)
-        ? controller.profile!.username
-        : 'Usuário';
+Widget header(BuildContext context) {
+  // Escuta as alterações no controller do provider
+  final controller = context.watch<SQlitePasswordController>();
+  log('Perfil salvo: ${controller.profile}');
+  // Obtém o nome cadastrado ou exibe o padrão "Usuário"
+  final String username =
+      (controller.profile != null && controller.profile!.username.isNotEmpty)
+      ? controller.profile!.username
+      : 'Usuário';
 
-    // Obtém as iniciais do nome ou exibe "AL" por padrão
-    final String initials = username.length >= 2
-        ? username.substring(0, 2).toUpperCase()
-        : 'US';
+  // Obtém as iniciais do nome ou exibe "AL" por padrão
+  final String initials = username.length >= 2
+      ? username.substring(0, 2).toUpperCase()
+      : 'US';
 
-    return SizedBox(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
+  return SizedBox(
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        GestureDetector(
+          onTap: (() => Navigator.pushNamed(context, "/profile")),
+          child: Row(
             children: [
               Container(
                 decoration: const BoxDecoration(
@@ -73,33 +75,40 @@ class _HomePageState extends State<HomePage> {
                       text: 'Olá, ',
                       style: AppTextStyle.headline5,
                       children: [
-                        TextSpan(text: username, style: AppTextStyle.headline4),
+                        TextSpan(
+                          text: username,
+                          style: AppTextStyle.headline4,
+                        ),
                       ],
                     ),
                   ),
-                  Text('Sinta-se seguro aqui', style: AppTextStyle.subtitle2),
+                  Text(
+                    'Sinta-se seguro aqui',
+                    style: AppTextStyle.subtitle2,
+                  ),
                 ],
               ),
             ],
           ),
-          Container(
-            decoration: BoxDecoration(
-              border: Border.all(color: AppColors.white),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            width: 48,
-            height: 48,
-            child: IconButton(
-              icon: const Icon(Icons.add, color: AppColors.white),
-              onPressed: () {
-                Navigator.pushNamed(context, '/new_password');
-              },
-            ),
+        ),
+        Container(
+          decoration: BoxDecoration(
+            border: Border.all(color: AppColors.white),
+            borderRadius: BorderRadius.circular(8),
           ),
-        ],
-      ),
-    );
-  }
+          width: 48,
+          height: 48,
+          child: IconButton(
+            icon: const Icon(Icons.add, color: AppColors.white),
+            onPressed: () {
+              Navigator.pushNamed(context, '/new_password');
+            },
+          ),
+        ),
+      ],
+    ),
+  );
+}
 
   @override
   Widget build(BuildContext context) {
