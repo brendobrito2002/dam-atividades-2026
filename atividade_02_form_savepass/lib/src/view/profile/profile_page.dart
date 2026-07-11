@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:save_pass/src/controller/sqlite_password_controller.dart';
+import 'package:save_pass/src/model/user_profile_model.dart';
 import 'package:save_pass/ui/colors.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -14,22 +17,29 @@ class _ProfilePageState extends State<ProfilePage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
-  //final RegExp _emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+  final RegExp _emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
 
   bool _obscurePassword = true;
+
+  @override
+  void dispose() {
+    _usernameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   OutlineInputBorder get _border => OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
         borderSide: const BorderSide(color: AppColors.gray500),
       );
-  
+
   Widget _buildLabel(String text) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
       child: Text(
         text,
-        style: const TextStyle(
-            color: AppColors.white),
+        style: const TextStyle(color: AppColors.white),
       ),
     );
   }
@@ -37,7 +47,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Perfil de Usuário')),
+      appBar: AppBar(title: const Text('Perfil do Usuário'), centerTitle: true),
       body: Padding(
         padding: const EdgeInsets.all(24),
         child: Form(
@@ -59,7 +69,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   focusedBorder: _border.copyWith(
                     borderSide: const BorderSide(color: AppColors.primary),
                   ),
-                ), /*
+                ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'O nome de usuário é obrigatório';
@@ -68,7 +78,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     return 'O nome deve ter no mínimo 3 caracteres';
                   }
                   return null;
-                },*/
+                },
               ),
               const SizedBox(height: 20),
               _buildLabel('E-mail de recuperação'),
@@ -85,7 +95,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   focusedBorder: _border.copyWith(
                     borderSide: const BorderSide(color: AppColors.primary),
                   ),
-                ), /*
+                ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'O e-mail é obrigatório';
@@ -94,7 +104,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     return 'Informe um e-mail válido';
                   }
                   return null;
-                },*/
+                },
               ),
               const SizedBox(height: 20),
               _buildLabel('Senha secreta'),
@@ -126,16 +136,45 @@ class _ProfilePageState extends State<ProfilePage> {
                     },
                   ),
                 ),
-                /*
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'A senha é obrigatório';
+                    return 'A senha é obrigatória';
                   }
                   if (value.length < 6) {
                     return 'A senha deve ter no mínimo 6 caracteres';
                   }
                   return null;
-                },*/
+                },
+              ),
+              const SizedBox(height: 32),
+              SizedBox(
+                height: 50,
+                child: ElevatedButton(
+                  onPressed: () async {
+                    if (_formKey.currentState!.validate()) {
+                      final profile = UserProfileModel(
+                        username: _usernameController.text,
+                        email: _emailController.text,
+                        password: _passwordController.text,
+                      );
+
+                      await context
+                          .read<SQlitePasswordController>()
+                          .saveProfile(profile);
+
+                      if (!mounted) return;
+
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Perfil salvo com sucesso!'),
+                        ),
+                      );
+
+                      Navigator.pop(context);
+                    }
+                  },
+                  child: const Text('Salvar Perfil', style: TextStyle(color: Colors.white)),
+                ),
               ),
             ],
           ),
