@@ -53,7 +53,13 @@ class ProductListPage extends StatelessWidget {
           Expanded(
             child: productViewModel.products.isEmpty
                 ? const Center(child: Text('Nenhum produto cadastrado.'))
-                : ListView.builder(
+                : GridView.builder(
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 2.0,
+                      mainAxisSpacing: 10.0,
+                      crossAxisSpacing: 10.0,
+                    ),
                     itemCount: productViewModel.products.length,
                     itemBuilder: (context, index) {
                       final product = productViewModel.products[index];
@@ -79,13 +85,10 @@ class ProductListPage extends StatelessWidget {
                           children: [
                             IconButton(
                               icon: Icon(
-                                product.isFavorite
-                                    ? Icons.favorite
-                                    : Icons.favorite_border,
+                                product.isFavorite ? Icons.favorite : Icons.favorite_border,
                                 color: product.isFavorite ? Colors.red : null,
                               ),
-                              onPressed: () =>
-                                  productViewModel.toggleFavorite(product.id),
+                              onPressed: () => productViewModel.toggleFavorite(product.id),
                             ),
                             IconButton(
                               icon: const Icon(Icons.add_shopping_cart, color: Colors.blue),
