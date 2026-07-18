@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 class SettingsViewModel extends ChangeNotifier{
   bool _isDarkMode = false;
 
-  bool get darkMode{
+  bool get isDarkMode{
     return _isDarkMode;
   }
 
